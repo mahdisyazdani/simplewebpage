@@ -1,0 +1,41 @@
+
+/************************
+Header
+************************/
+
+.main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: red;
+  margin: 0 auto;
+  /*min-height: 50px;*/
+}
+
+
+/************************
+Navigation
+************************/
+
+.main-nav {
+  float: right;
+  padding: 10px;
+  background: green;
+  /*display: inline-block;*/
+}
+
+.main-nav li {
+  margin: 15px 10px;
+  float: left;
+  display: inline-block;
+}
+
+/************************
+Clearfix
+************************/
+
+.group::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
