@@ -1,13 +1,13 @@
-
-    function showNews(array) {
+    function showNews() {
         content.style.display = "none";
         newsContent.style.display = "block";
+    }
+    function readNews(array) {
         var out = "";
         var i;
         for(i = 0 ; i < array.length ; i++){
             out += '<h2>'+array[i].title+'</h2><br><p>'+array[i].body+'</p><br>'
         }
-        console.log(out);
         newsContent.innerHTML=out;
     }
     function showSearchBox() {
@@ -37,3 +37,5 @@
 
     var content = document.getElementsByClassName("content")[0];
 
+    var news = document.getElementsByClassName("news")[0];
+    news.addEventListener("click", showNews);

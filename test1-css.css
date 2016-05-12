@@ -148,7 +148,7 @@ h2{display:block;}
 	font-size:15px;
 }
 .leftmenuinner a:hover{background-color:#dddddd;}
-.content,#news{
+.content{
 	margin-left:230px;
 	margin-right:230px;
 	padding:16px;
@@ -158,6 +158,18 @@ h2{display:block;}
 	color:#000;
 	background-color:#fff;
 	border:2px #dddddd solid;
+    display: none;
+}
+#news{
+    margin-left:230px;
+    margin-right:230px;
+    padding:16px;
+    width:67.3832%;
+    height:100%;
+    float:right;
+    color:#000;
+    background-color:#fff;
+    border:2px #dddddd solid;
     display: none;
 }
 
