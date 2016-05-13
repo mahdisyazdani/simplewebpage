@@ -6,9 +6,10 @@
         var out = "";
         var i;
         for(i = 0 ; i < array.length ; i++){
-            out += '<h2>'+array[i].title+'</h2><br><p>'+array[i].body+'</p><br>'
+            out +='<div class="news-item">'+'<img src="'+array[i].image+'"/>'+ '<h2>'+array[i].title+'</h2><p>'+array[i].body+'</p><br>'+'</div>'
         }
         newsContent.innerHTML=out;
+        console.log(out);
     }
     function showSearchBox() {
             searchIcon.style.marginLeft="0px";
@@ -30,6 +31,7 @@
     searchBox.addEventListener("mouseout",hideSearchBox)
 
     var home = document.getElementsByClassName("home")[0];
+
     //var news = document.getElementsByClassName("news")[0];
     home.addEventListener("click",showHome);
 
@@ -39,3 +41,4 @@
 
     var news = document.getElementsByClassName("news")[0];
     news.addEventListener("click", showNews);
+    showHome();
