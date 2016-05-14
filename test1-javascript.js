@@ -53,7 +53,6 @@ $(document).ready(function () {
         var id =  $(event.target).attr("id");
         var contentLink = $(".news-item")[id-1];
         var selectedDivId = "#"+$(contentLink).attr("id");
-        confirm($(selectedDivId).offset().top);
         $('html, body').animate({
             scrollTop: $(selectedDivId).offset().top /*- $(window).scrollTop()*/
         }, 2000);
