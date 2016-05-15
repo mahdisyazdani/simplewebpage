@@ -37,7 +37,10 @@ body{
 .search-box{
 	padding-top: 10px;
 	padding-bottom: 10px;
-	display: none;
+	float: left;
+	overflow: hidden;
+	height: 34px;
+	width: 0px;
 }
 .search-box input{
 	background-color: gainsboro;
