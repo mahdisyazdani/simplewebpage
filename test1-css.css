@@ -267,6 +267,8 @@ h2 {
     background-color: #fff;
     border: 2px #dddddd solid;
     display: none;
+    text-align: center;
+
 }
 
 #news p {
@@ -278,10 +280,15 @@ h2 {
 #news .news-item {
     border: 1px #dddddd solid;
     margin: 15px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 #news .news-item img {
-    margin: 25px 148px 0px 148px;
+    /*margin: 25px 148px 0px 148px;*/
+    margin-top: 25px;
+    padding:2px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 #news .news-item h2 {
