@@ -1,67 +1,100 @@
-var searchIcon = $(".search");
-var inputBox = $(".search-box")[0];
-var isOpen = false;
+var searchIcon ;
+var inputBox ;
+var searchIsOpen ;
 
-var news = $(".news")[0];
-var newsContent = $("#news")[0];
-var content = $(".content")[0];
-var home = $(".home")[0];
+var news ;
+var newsContent ;
+var content ;
+var home ;
+var imageDescription;
+
+var tab;
+
 
 //read news from json
 function readNews(array) {
-    var leftmenuinnerinner = document.getElementsByClassName("leftmenuinnerinner")[0];
+    var leftmenuinnerinner = $(".leftmenuinnerinner")[0];
     var newsTitleList = "";
     var out = "";
-    var i;
-    for (i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
         newsTitleList += '<a href="#" id="' + array[i].id + '">' + array[i].title + '</a>';
         out += '<div class="news-item" id="news' + array[i].id + '">' + '<img src="' + array[i].image + '"/>' + '<h2>' + array[i].title + '</h2><p>' + array[i].body + '</p><br>' + '</div>'
     }
     newsContent.innerHTML = out;
     leftmenuinnerinner.innerHTML += newsTitleList;
 }
+//read image information
+function readImageInfo(array) {
+    var innerContent = $(".inner-content");
+    for (var i = 0 ; i <array.length ; i++){
+        var gallery ='<div class="gallery" id="'+array[i].id +'"><a target="_blank" href="'+array[i].image+
+            '"><img src="'+array[i].image+'" alt="'+array[i].title+'"></a>'+'<p class="desc" contenteditable="true">'
+            +'<span>'+array[i].description+'</span></p></div>';
+        $(innerContent).append(gallery);
+    }
+    //save changes of image description on localStorage
+    saveChangesOfDescs();
+}
 $(document).ready(function () {
-    //init
-    init();
+
+    searchIcon = $(".search");
+    inputBox = $(".search-box");
+    searchIsOpen = false;
+    news = $(".news");
+    newsContent = $("#news")[0];
+    content = $(".content");
+    home = $(".home");
+    imageDescription = $(".inner-content");
+    tab = $(".tab");
+
     //go to top of the selected news from menu
     goToSelectedNews();
     //search box setting
     searchBoxSetting()
     //show news in the main page
-    showNews()
-    //show main conten
-    showHome()
+    newsSetting()
+    //show main content
+    homeLinkSetting()
+
+    imageDescription.focusout(function () {
+        saveChangesOfDescs();
+    });
+
+    tab.click(function (event) {
+        console.log(event.target);
+        openTab(event);
+    })
 });
-function init() {
-    $(content).css("display","block");
-    $(newsContent).css("display","none");
-}
-function showNews() {
+
+function newsSetting() {
     $(news).click(function () {
         $(content).css("display","none");
         $(newsContent).css("display","block");
+        $(tab).css("display","none");
     });
 }
-function showHome(){
+function homeLinkSetting(){
     $(home).click(function () {
         $(content).css("display","block");
         $(newsContent).css("display","none");
+        $(tab).css("display","block");
     });
 }
 function searchBoxSetting(){
     searchIcon.mouseover(function () {
-        if (!isOpen){
+        if (!searchIsOpen){
             $(inputBox).animate({width:'200px',marginLeft:'15px'},"slow",function () {
-                isOpen = true;
+                searchIsOpen = true;
                 $(this).find('input')[0].focus();
             });
         }
     });
     $(document).mouseup(function (e) {
-        if (!searchIcon.is(e.target) && searchIcon.has(e.target).length == 0){
-            if (isOpen){
+        if ((!searchIcon.is(e.target) && searchIcon.has(e.target).length == 0) &&
+            ($(".search-box").has(e.target).length != 1)){
+            if (searchIsOpen){
                 $(inputBox).animate({width:'0px',marginLeft:'0px'},"slow",function () {
-                    isOpen = false;
+                    searchIsOpen = false;
                 });
             }
         }
@@ -74,6 +107,7 @@ function goToSelectedNews() {
         if($(content).css("display")=="block"){
             $(content).css("display","none");
             $(newsContent).css("display","block");
+            $(tab).css("display","none");
         }
         event.preventDefault();
         var id =  $(event.target).attr("id");
@@ -83,4 +117,21 @@ function goToSelectedNews() {
             scrollTop: $(selectedDivId).offset().top
         }, 2000);
     });
+}
+function saveChangesOfDescs() {
+    var innerContent = $(".inner-content");
+    var array = new Array();
+    for (var i = 1; i < 7 ; i++){
+        var item = innerContent.find("#"+i);
+        array[i-1] = {
+            "id":item.attr("id")+"",
+            "title":$(item.find("img")).attr("alt")+"",
+            "image":$(item.find("img")).attr("src")+"",
+            "description":$(item.find("p")).text()};
+    }
+    localStorage.setItem("contentArray",JSON.stringify(array));
+}
+function openTab(event) {
+    console.log($(event.target).text());
+    $(content.find("h1")).text($(event.target).text());
 }
