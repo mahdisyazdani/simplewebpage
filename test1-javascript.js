@@ -52,7 +52,7 @@ function readImageInfo(array, category) {
         }
     }
 //save changes of image description on localStorage
-    saveChangesOfDescs(category);
+    //saveChangesOfDescs(category);
 }
 $(document).ready(function () {
 
@@ -77,7 +77,6 @@ $(document).ready(function () {
 
 
     imageDescription.focusout(function () {
-
         var tabCategory = content.find("h1").text();
         if (tabCategory == "طبیعت"){
             tabCategory="nature";
@@ -150,15 +149,20 @@ function goToSelectedNews() {
 function saveChangesOfDescs(name) {
     var innerContent = $(".inner-content");
     var array = new Array();
+    var j =0 ;
     for (var i = 1; i < 19; i++) {
+
         var item = innerContent.find("#" + i);
-        array[i - 1] = {
+        if(item.length==0)
+            continue;
+        array[j] = {
             "id": item.attr("id") + "",
             "title": $(item.find("img")).attr("alt") + "",
             "image": $(item.find("img")).attr("src") + "",
             "description": $(item.find("p")).text(),
             "category":name
         };
+        j++;
     }
     localStorage.setItem(name, JSON.stringify(array));
 }

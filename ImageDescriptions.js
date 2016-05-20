@@ -135,21 +135,21 @@ $(document).ready(function () {
     var tab = $(".tab");
     $("#tab1").css("background-color", "#ccc");
     $(content.find("h1")).text(tabCategory);
+    if (tabCategory == "طبیعت") {
+        tabCategory = "nature";
+    }
+    else if (tabCategory == "شهر") {
+        tabCategory = "city";
+    }
+    else if (tabCategory == "کوه") {
+        tabCategory = "mountain";
+    }
     if (!(localStorage.getItem(tabCategory) === null)) {
         var localStorageArr = JSON.parse(localStorage.getItem(tabCategory));
         readImageInfo(localStorageArr, tabCategory);
     } else {
         readImageInfo(arr, tabCategory);
-        if (tabCategory == "طبیعت") {
-            tabCategory = "nature";
-        }
-        else if (tabCategory == "شهر") {
-            tabCategory = "city";
-        }
-        else if (tabCategory == "کوه") {
-            tabCategory = "mountain";
-        }
-        saveChangesOfDescs(tabCategory);
+
     }
 
 
@@ -165,22 +165,22 @@ function openTab(event) {
         $("#tab1").css("background-color", "#f1f1f1");
     else $("#tab1").css("background-color", "#ccc");
     $(content.find("h1")).text($(event.target).text());
-
-    if (!(localStorage.getItem($(event.target).text()) === null)) {
-        var localStorageArr = JSON.parse(localStorage.getItem($(event.target).text()));
+     var tabCategory = $(event.target).text();
+     if (tabCategory == "طبیعت") {
+     tabCategory = "nature";
+     }
+     else if (tabCategory == "شهر") {
+     tabCategory = "city";
+     }
+     else if (tabCategory == "کوه") {
+     tabCategory = "mountain";
+     }
+    if (!(localStorage.getItem(tabCategory) === null)) {
+        var localStorageArr = JSON.parse(localStorage.getItem(tabCategory));
         readImageInfo(localStorageArr, $(event.target).text());
     } else {
         readImageInfo(arr, $(event.target).text());
-        var tabCategory = $(event.target).text();
-        if (tabCategory == "طبیعت") {
-            tabCategory = "nature";
-        }
-        else if (tabCategory == "شهر") {
-            tabCategory = "city";
-        }
-        else if (tabCategory == "کوه") {
-            tabCategory = "mountain";
-        }
-        saveChangesOfDescs(tabCategory);
+
+        /*saveChangesOfDescs(tabCategory);*/
     }
 }
