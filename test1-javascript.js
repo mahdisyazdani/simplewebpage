@@ -7,6 +7,8 @@ var newsContent ;
 var content ;
 var home ;
 var imageDescription;
+var imageDescriptionIsFocused;
+var description;
 
 var tab;
 
@@ -18,7 +20,9 @@ function readNews(array) {
     var out = "";
     for (var i = 0; i < array.length; i++) {
         newsTitleList += '<a href="#" id="' + array[i].id + '">' + array[i].title + '</a>';
-        out += '<div class="news-item" id="news' + array[i].id + '">' + '<img src="' + array[i].image + '"/>' + '<h2>' + array[i].title + '</h2><p>' + array[i].body + '</p><br>' + '</div>'
+        out += '<div class="news-item" id="news' + array[i].id + '">' + '<h2>' + array[i].title + '</h2><img src="'
+            + array[i].image + '"/>'
+            + '<p>' + array[i].body + '</p><br>' + '</div>'
     }
     newsContent.innerHTML = out;
     leftmenuinnerinner.innerHTML += newsTitleList;
@@ -46,6 +50,7 @@ $(document).ready(function () {
     home = $(".home");
     imageDescription = $(".inner-content");
     tab = $(".tab");
+    imageDesriptionIsFocused=false;
 
     //go to top of the selected news from menu
     goToSelectedNews();
@@ -56,9 +61,16 @@ $(document).ready(function () {
     //show main content
     homeLinkSetting()
 
+
     imageDescription.focusout(function () {
         saveChangesOfDescs();
     });
+
+    imageDesriptionIsFocused.focus(function () {
+        imageDesriptionIsFocused=true;
+    });
+
+
 
     tab.click(function (event) {
         console.log(event.target);
