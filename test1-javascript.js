@@ -7,8 +7,6 @@ var newsContent ;
 var content ;
 var home ;
 var imageDescription;
-var imageDescriptionIsFocused;
-var description;
 
 var tab;
 
@@ -50,7 +48,6 @@ $(document).ready(function () {
     home = $(".home");
     imageDescription = $(".inner-content");
     tab = $(".tab");
-    imageDesriptionIsFocused=false;
 
     //go to top of the selected news from menu
     goToSelectedNews();
@@ -66,9 +63,7 @@ $(document).ready(function () {
         saveChangesOfDescs();
     });
 
-    imageDesriptionIsFocused.focus(function () {
-        imageDesriptionIsFocused=true;
-    });
+
 
 
 
