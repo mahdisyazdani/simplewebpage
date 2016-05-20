@@ -1,11 +1,11 @@
-var searchIcon ;
-var inputBox ;
-var searchIsOpen ;
+var searchIcon;
+var inputBox;
+var searchIsOpen;
 
-var news ;
-var newsContent ;
-var content ;
-var home ;
+var news;
+var newsContent;
+var content;
+var home;
 var imageDescription;
 
 var tab;
@@ -26,16 +26,33 @@ function readNews(array) {
     leftmenuinnerinner.innerHTML += newsTitleList;
 }
 //read image information
-function readImageInfo(array) {
-    var innerContent = $(".inner-content");
-    for (var i = 0 ; i <array.length ; i++){
-        var gallery ='<div class="gallery" id="'+array[i].id +'"><a target="_blank" href="'+array[i].image+
-            '"><img src="'+array[i].image+'" alt="'+array[i].title+'"></a>'+'<p class="desc" contenteditable="true">'
-            +'<span>'+array[i].description+'</span></p></div>';
-        $(innerContent).append(gallery);
+function readImageInfo(array, category) {
+
+    if (category == "طبیعت"){
+        category="nature";
     }
-    //save changes of image description on localStorage
-    saveChangesOfDescs();
+    else if(category == "شهر"){
+        category = "city";
+    }
+    else if (category == "کوه"){
+        category = "mountain";
+    }
+
+    var innerContent = $(".inner-content");
+    innerContent.empty();
+    for (var i = 0; i < array.length; i++) {
+
+        if (array[i].category == category) {
+            console.log(category + "::"+array[i].category);
+            console.log(category + "::"+array[i].category);
+            var gallery = '<div class="gallery" id="' + array[i].id + '"><a target="_blank" href="' + array[i].image +
+                '"><img src="' + array[i].image + '" alt="' + array[i].title + '"></a>' + '<p class="desc" contenteditable="true">'
+                + '<span>' + array[i].description + '</span></p></div>';
+            $(innerContent).append(gallery);
+        }
+    }
+//save changes of image description on localStorage
+    saveChangesOfDescs(category);
 }
 $(document).ready(function () {
 
@@ -46,7 +63,7 @@ $(document).ready(function () {
     newsContent = $("#news")[0];
     content = $(".content");
     home = $(".home");
-    imageDescription = $(".inner-content");
+    imageDescription = $(".inner-content");     
     tab = $(".tab");
 
     //go to top of the selected news from menu
@@ -60,37 +77,42 @@ $(document).ready(function () {
 
 
     imageDescription.focusout(function () {
-        saveChangesOfDescs();
+
+        var tabCategory = content.find("h1").text();
+        if (tabCategory == "طبیعت"){
+            tabCategory="nature";
+        }
+        else if(tabCategory == "شهر"){
+            tabCategory = "city";
+        }
+        else if (tabCategory == "کوه"){
+            tabCategory = "mountain";
+        }
+        saveChangesOfDescs(tabCategory);
     });
 
 
-
-
-
-    tab.click(function (event) {
-        console.log(event.target);
-        openTab(event);
-    })
+    
 });
 
 function newsSetting() {
     $(news).click(function () {
-        $(content).css("display","none");
-        $(newsContent).css("display","block");
-        $(tab).css("display","none");
+        $(content).css("display", "none");
+        $(newsContent).css("display", "block");
+        $(tab).css("display", "none");
     });
 }
-function homeLinkSetting(){
+function homeLinkSetting() {
     $(home).click(function () {
-        $(content).css("display","block");
-        $(newsContent).css("display","none");
-        $(tab).css("display","block");
+        $(content).css("display", "block");
+        $(newsContent).css("display", "none");
+        $(tab).css("display", "block");
     });
 }
-function searchBoxSetting(){
+function searchBoxSetting() {
     searchIcon.mouseover(function () {
-        if (!searchIsOpen){
-            $(inputBox).animate({width:'200px',marginLeft:'15px'},"slow",function () {
+        if (!searchIsOpen) {
+            $(inputBox).animate({width: '200px', marginLeft: '15px'}, "slow", function () {
                 searchIsOpen = true;
                 $(this).find('input')[0].focus();
             });
@@ -98,9 +120,9 @@ function searchBoxSetting(){
     });
     $(document).mouseup(function (e) {
         if ((!searchIcon.is(e.target) && searchIcon.has(e.target).length == 0) &&
-            ($(".search-box").has(e.target).length != 1)){
-            if (searchIsOpen){
-                $(inputBox).animate({width:'0px',marginLeft:'0px'},"slow",function () {
+            ($(".search-box").has(e.target).length != 1)) {
+            if (searchIsOpen) {
+                $(inputBox).animate({width: '0px', marginLeft: '0px'}, "slow", function () {
                     searchIsOpen = false;
                 });
             }
@@ -111,34 +133,32 @@ function searchBoxSetting(){
 function goToSelectedNews() {
 
     $(".leftmenuinnerinner").click(function (event) {
-        if($(content).css("display")=="block"){
-            $(content).css("display","none");
-            $(newsContent).css("display","block");
-            $(tab).css("display","none");
+        if ($(content).css("display") == "block") {
+            $(content).css("display", "none");
+            $(newsContent).css("display", "block");
+            $(tab).css("display", "none");
         }
         event.preventDefault();
-        var id =  $(event.target).attr("id");
-        var contentLink = $(".news-item")[id-1];
-        var selectedDivId = "#"+$(contentLink).attr("id");
+        var id = $(event.target).attr("id");
+        var contentLink = $(".news-item")[id - 1];
+        var selectedDivId = "#" + $(contentLink).attr("id");
         $('html, body').animate({
             scrollTop: $(selectedDivId).offset().top
         }, 2000);
     });
 }
-function saveChangesOfDescs() {
+function saveChangesOfDescs(name) {
     var innerContent = $(".inner-content");
     var array = new Array();
-    for (var i = 1; i < 7 ; i++){
-        var item = innerContent.find("#"+i);
-        array[i-1] = {
-            "id":item.attr("id")+"",
-            "title":$(item.find("img")).attr("alt")+"",
-            "image":$(item.find("img")).attr("src")+"",
-            "description":$(item.find("p")).text()};
+    for (var i = 1; i < 19; i++) {
+        var item = innerContent.find("#" + i);
+        array[i - 1] = {
+            "id": item.attr("id") + "",
+            "title": $(item.find("img")).attr("alt") + "",
+            "image": $(item.find("img")).attr("src") + "",
+            "description": $(item.find("p")).text(),
+            "category":name
+        };
     }
-    localStorage.setItem("contentArray",JSON.stringify(array));
-}
-function openTab(event) {
-    console.log($(event.target).text());
-    $(content.find("h1")).text($(event.target).text());
+    localStorage.setItem(name, JSON.stringify(array));
 }
