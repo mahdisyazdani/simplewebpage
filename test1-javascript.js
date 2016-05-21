@@ -15,16 +15,19 @@ var tab;
 function readNews(array) {
     var leftmenuinnerinner = $(".leftmenuinnerinner")[0];
     var newsTitleList = "";
-    var out = "";
     for (var i = 0; i < array.length; i++) {
+        var newsElement = $($("#news-script").html()).clone();
+        var id = "news"+array[i].id;
+        newsElement.attr('id',id);
+        newsElement.find('h2').html(array[i].title);
+        newsElement.find('img').attr('src',array[i].image);
+        newsElement.find('p').text(array[i].body);
+        $(newsContent).append(newsElement);
         newsTitleList += '<a href="#" id="' + array[i].id + '">' + array[i].title + '</a>';
-        out += '<div class="news-item" id="news' + array[i].id + '">' + '<h2>' + array[i].title + '</h2><img src="'
-            + array[i].image + '"/>'
-            + '<p>' + array[i].body + '</p><br>' + '</div>'
     }
-    newsContent.innerHTML = out;
     leftmenuinnerinner.innerHTML += newsTitleList;
 }
+
 //read image information
 function readImageInfo(array, category) {
 
@@ -43,8 +46,6 @@ function readImageInfo(array, category) {
     for (var i = 0; i < array.length; i++) {
 
         if (array[i].category == category) {
-            console.log(category + "::"+array[i].category);
-            console.log(category + "::"+array[i].category);
             var gallery = '<div class="gallery" id="' + array[i].id + '"><a target="_blank" href="' + array[i].image +
                 '"><img src="' + array[i].image + '" alt="' + array[i].title + '"></a>' + '<p class="desc" contenteditable="true">'
                 + '<span>' + array[i].description + '</span></p></div>';
@@ -74,7 +75,6 @@ $(document).ready(function () {
     newsSetting()
     //show main content
     homeLinkSetting()
-
 
     imageDescription.focusout(function () {
         var tabCategory = content.find("h1").text();
