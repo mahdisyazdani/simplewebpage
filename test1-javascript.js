@@ -7,6 +7,10 @@ var newsContent;
 var content;
 var home;
 var imageDescription;
+var accountUser;
+var logInPage;
+var signUpPage;
+var signUpLink;
 
 var tab;
 
@@ -66,6 +70,10 @@ $(document).ready(function () {
     home = $(".home");
     imageDescription = $(".inner-content");     
     tab = $(".tab");
+    accountUser = $(".account");
+    logInPage = $("#login-page");
+    // signUpLink = $(".signup-link");
+    signUpPage = $("#signup-page");
 
     //go to top of the selected news from menu
     goToSelectedNews();
@@ -75,6 +83,9 @@ $(document).ready(function () {
     newsSetting()
     //show main content
     homeLinkSetting()
+    //show login page
+    logInPageSetting();
+
 
     imageDescription.focusout(function () {
         var tabCategory = content.find("h1").text();
@@ -91,11 +102,45 @@ $(document).ready(function () {
     });
 
 
+    setLogInPageItem();
+    setSignUpPageItem();
     
 });
 
+function setLogInPageItem() {
+    var accountElement = $($("#login-page-script").html()).clone();
+    logInPage.append(accountElement);
+    console.log(accountElement.find(".signup-link"));
+    $(accountElement.find(".signup-link")).click(function () {
+        signUpPageSetting();
+    });
+}
+
+function logInPageSetting() {
+    $(accountUser).click(function () {
+        $(newsContent).css("display", "none");
+        $(content).css("display", "none");
+        $(logInPage).css("display", "block");
+        $(signUpPage).css("display", "none");
+        $(tab).css("display", "none");
+    })
+}
+function setSignUpPageItem() {
+    var signupElement = $($("#signup-page-script").html()).clone();
+    signUpPage.append(signupElement);
+}
+function signUpPageSetting() {
+        $(newsContent).css("display", "none");
+        $(content).css("display", "none");
+        $(logInPage).css("display", "none");
+        $(signUpPage).css("display", "block");
+        $(tab).css("display", "none");
+
+}
 function newsSetting() {
     $(news).click(function () {
+        $(logInPage).css("display", "none");
+        $(signUpPage).css("display", "none");
         $(content).css("display", "none");
         $(newsContent).css("display", "block");
         $(tab).css("display", "none");
@@ -103,6 +148,8 @@ function newsSetting() {
 }
 function homeLinkSetting() {
     $(home).click(function () {
+        $(logInPage).css("display", "none");
+        $(signUpPage).css("display", "none");
         $(content).css("display", "block");
         $(newsContent).css("display", "none");
         $(tab).css("display", "block");
@@ -132,10 +179,12 @@ function searchBoxSetting() {
 function goToSelectedNews() {
 
     $(".leftmenuinnerinner").click(function (event) {
-        if ($(content).css("display") == "block") {
+        if ($(content).css("display") == "block" || $(signUpPage).css("display") == "block" || $(logInPage).css("display") == "block" ) {
             $(content).css("display", "none");
             $(newsContent).css("display", "block");
             $(tab).css("display", "none");
+            $(logInPage).css("display", "none");
+            $(signUpPage).css("display", "none");
         }
         event.preventDefault();
         var id = $(event.target).attr("id");

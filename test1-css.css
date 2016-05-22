@@ -328,3 +328,132 @@ ul.tab li a:hover {
 ul.tab li a:focus, .active {
     background-color: #ccc;
 }
+
+#login-page {
+
+    margin-left: 230px;
+    margin-right: 230px;
+    margin-top: 80px;
+    padding: 16px;
+    width: 25%;
+    height: 400px;
+    float: right;
+    color: #000;
+    background-color: #fff;
+    border: 2px #d43f3a solid;
+    display: none;
+    text-align: center;
+    border-radius: 2px;
+    font-family: "B Yekan";
+}
+#login-page .inner-account{
+    margin-top: 90px;
+}
+#login-page h2{
+    margin-top:45px;
+    color: #d43f3a;
+}
+#login-page input[type='text'],input[type='password']{
+    height: 40px;
+    width: 250px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 2px;
+    font-family: "B Yekan";
+}
+#login-page input[type='text']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#login-page input[type='password']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#login-page input[type='submit']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#login-page input[type='submit']:hover{
+    cursor: pointer;
+}
+#login-page input[type='submit']{
+    margin-top: 15px;
+    background-color: #d43f3a;
+    color: white;
+    height: 46px;
+    width: 254px;
+    border: 2px #d43f3a solid;
+    border-radius: 5px;
+
+    font-family: "B Yekan";
+}
+#login-page a{
+    text-decoration:none;
+    color: #d43f3a;
+}
+#signup-page {
+
+    margin-left: 230px;
+    margin-right: 230px;
+    margin-top: 80px;
+    padding: 16px;
+    width: 25%;
+    height: 500px;
+    float: right;
+    color: #000;
+    background-color: #fff;
+    border: 2px #d43f3a solid;
+    display: none;
+    text-align: center;
+    border-radius: 2px;
+    font-family: "B Yekan";
+}
+#signup-page .inner-account{
+    margin-top: 90px;
+}
+#signup-page h2{
+    margin-top:45px;
+    color: #d43f3a;
+}
+#signup-page input[type='text'],input[type='password']{
+    height: 40px;
+    width: 250px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 2px;
+    font-family: "B Yekan";
+}
+#signup-page input[type='text']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#signup-page input[type='password']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#signup-page input[type='submit']:focus{
+    outline: none;
+    border-color: #d43f3a;
+    box-shadow: 0 0 10px #d43f3a;
+}
+#signup-page input[type='submit']:hover{
+    cursor: pointer;
+}
+#signup-page input[type='submit']{
+    margin-top: 15px;
+    background-color: #d43f3a;
+    color: white;
+    height: 46px;
+    width: 254px;
+    border: 2px #d43f3a solid;
+    border-radius: 5px;
+
+    font-family: "B Yekan";
+}
